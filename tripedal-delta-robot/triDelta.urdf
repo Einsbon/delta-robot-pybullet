@@ -1,0 +1,1552 @@
+<?xml version="1.0"?>
+<!--
+8/sqrt(3)  /100 = 0.0461880215352
+16/sqrt(3) /100 = 0.0923760430703
+
+pi = 3.14159265359
+pi/2 = 1.57079632679
+pi/3 = 1.0471975512
+2*pi/3 = 2.09439510239
+3*sqrt(3)/2 = 2.59807621135
+
+-->
+<robot name="triDelta">
+    <link name="body_base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.02" radius="0.15"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="linkWhite">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.02" radius="0.15"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <joint name="base_to_delta_A" type="fixed">
+        <parent link="body_base_link"/>
+        <child link="delta_A_base_link"/>
+        <origin xyz="0.12 0 -0.02"/>
+    </joint>
+
+    <link name="delta_A_base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="grey">
+                <color rgba="0.6 0.6 0.6 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- base A to motors -->
+
+    <joint name="delta_A_base_to_motor_1" type="fixed">
+        <parent link="delta_A_base_link"/>
+        <child link="delta_A_1_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_A_1_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.03 0 -0.02325"/>
+            <material name="motorColor">
+                <color rgba="0.3 0.3 0.3 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.03 0 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_A_base_to_motor_2" type="fixed">
+        <parent link="delta_A_base_link"/>
+        <child link="delta_A_2_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_A_2_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 -1.0471975512" xyz="-0.015 0.0259807621135 -0.02325"/>
+            <material name="motorColor"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 -1.0471975512" xyz="-0.015 0.0259807621135 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <joint name="delta_A_base_to_motor_3" type="fixed">
+        <parent link="delta_A_base_link"/>
+        <child link="delta_A_3_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_A_3_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 1.0471975512" xyz="-0.015 -0.0259807621135 -0.02325"/>
+            <material name="motorColor"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 1.0471975512" xyz="-0.015 -0.0259807621135 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- base A to cylinders (joint) -->
+
+    <joint name="motor_A_1" type="revolute">
+        <parent link="delta_A_base_link"/>
+        <child link="delta_A_jointCylinder_1_link"/>
+        <origin rpy="0 0 0" xyz=" 0.03 0 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_A_jointCylinder_1_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor">
+                <color rgba="1 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="motor_A_2" type="revolute">
+        <parent link="delta_A_base_link"/>
+        <child link="delta_A_jointCylinder_2_link"/>
+        <origin rpy="0 0 2.09439510239" xyz="-0.015 0.0259807621135 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_A_jointCylinder_2_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+    <joint name="motor_A_3" type="revolute">
+        <parent link="delta_A_base_link"/>
+        <child link="delta_A_jointCylinder_3_link"/>
+        <origin rpy="0 0 -2.09439510239" xyz="-0.015 -0.0259807621135 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_A_jointCylinder_3_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+    <!-- base A cylinders to upper leg -->
+
+    <joint name="delta_A_cylinder_to_upperLeg_1" type="fixed">
+        <parent link="delta_A_jointCylinder_1_link"/>
+        <child link="delta_A_1_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="delta_A_cylinder_to_upperLeg_2" type="fixed">
+        <parent link="delta_A_jointCylinder_2_link"/>
+        <child link="delta_A_2_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="delta_A_cylinder_to_upperLeg_3" type="fixed">
+        <parent link="delta_A_jointCylinder_3_link"/>
+        <child link="delta_A_3_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="delta_A_1_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <link name="delta_A_2_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <link name="delta_A_3_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 1 -->
+
+    <joint name="delta_A_1_knee_to_lower_joint" type="continuous">
+        <parent link="delta_A_1_up_link"/>
+        <child link="delta_A_1_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_A_1_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_A_1_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_A_1_knee_cylinder_link"/>
+        <child link="delta_A_1_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_A_1_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor">
+                <color rgba="0.7 0.7 1 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_A_1_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_A_1_knee_cylinder_link"/>
+        <child link="delta_A_1_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_A_1_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 2 -->
+
+    <joint name="delta_A_2_knee_to_lower_joint" type="continuous">
+        <parent link="delta_A_2_up_link"/>
+        <child link="delta_A_2_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_A_2_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_A_2_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_A_2_knee_cylinder_link"/>
+        <child link="delta_A_2_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_A_2_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_A_2_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_A_2_knee_cylinder_link"/>
+        <child link="delta_A_2_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_A_2_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 3 -->
+
+    <joint name="delta_A_3_knee_to_lower_joint" type="continuous">
+        <parent link="delta_A_3_up_link"/>
+        <child link="delta_A_3_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_A_3_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_A_3_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_A_3_knee_cylinder_link"/>
+        <child link="delta_A_3_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_A_3_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_A_3_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_A_3_knee_cylinder_link"/>
+        <child link="delta_A_3_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_A_3_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- =============================================================================== -->
+    <!-- =================================== delta B =================================== -->
+    <!-- =============================================================================== -->
+
+    <joint name="base_to_delta_B" type="fixed">
+        <parent link="body_base_link"/>
+        <child link="delta_B_base_link"/>
+        <origin xyz="-0.06 0.103923048454 -0.02"/>
+    </joint>
+
+    <link name="delta_B_base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="grey">
+                <color rgba="0.6 0.6 0.6 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- base A to motors -->
+
+    <joint name="delta_B_base_to_motor_1" type="fixed">
+        <parent link="delta_B_base_link"/>
+        <child link="delta_B_1_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_B_1_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.03 0 -0.02325"/>
+            <material name="motorColor">
+                <color rgba="0.3 0.3 0.3 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.03 0 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_B_base_to_motor_2" type="fixed">
+        <parent link="delta_B_base_link"/>
+        <child link="delta_B_2_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_B_2_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 -1.0471975512" xyz="-0.015 0.0259807621135 -0.02325"/>
+            <material name="motorColor"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 -1.0471975512" xyz="-0.015 0.0259807621135 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <joint name="delta_B_base_to_motor_3" type="fixed">
+        <parent link="delta_B_base_link"/>
+        <child link="delta_B_3_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_B_3_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 1.0471975512" xyz="-0.015 -0.0259807621135 -0.02325"/>
+            <material name="motorColor"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 1.0471975512" xyz="-0.015 -0.0259807621135 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- base A to cylinders (joint) -->
+
+    <joint name="motor_B_1" type="revolute">
+        <parent link="delta_B_base_link"/>
+        <child link="delta_B_jointCylinder_1_link"/>
+        <origin rpy="0 0 0" xyz=" 0.03 0 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_B_jointCylinder_1_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor">
+                <color rgba="1 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="motor_B_2" type="revolute">
+        <parent link="delta_B_base_link"/>
+        <child link="delta_B_jointCylinder_2_link"/>
+        <origin rpy="0 0 2.09439510239" xyz="-0.015 0.0259807621135 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_B_jointCylinder_2_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+    <joint name="motor_B_3" type="revolute">
+        <parent link="delta_B_base_link"/>
+        <child link="delta_B_jointCylinder_3_link"/>
+        <origin rpy="0 0 -2.09439510239" xyz="-0.015 -0.0259807621135 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_B_jointCylinder_3_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+    <!-- base A cylinders to upper leg -->
+
+    <joint name="delta_B_cylinder_to_upperLeg_1" type="fixed">
+        <parent link="delta_B_jointCylinder_1_link"/>
+        <child link="delta_B_1_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="delta_B_cylinder_to_upperLeg_2" type="fixed">
+        <parent link="delta_B_jointCylinder_2_link"/>
+        <child link="delta_B_2_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="delta_B_cylinder_to_upperLeg_3" type="fixed">
+        <parent link="delta_B_jointCylinder_3_link"/>
+        <child link="delta_B_3_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="delta_B_1_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <link name="delta_B_2_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <link name="delta_B_3_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 1 -->
+
+    <joint name="delta_B_1_knee_to_lower_joint" type="continuous">
+        <parent link="delta_B_1_up_link"/>
+        <child link="delta_B_1_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_B_1_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_B_1_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_B_1_knee_cylinder_link"/>
+        <child link="delta_B_1_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_B_1_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor">
+                <color rgba="0.7 0.7 1 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_B_1_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_B_1_knee_cylinder_link"/>
+        <child link="delta_B_1_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_B_1_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 2 -->
+
+    <joint name="delta_B_2_knee_to_lower_joint" type="continuous">
+        <parent link="delta_B_2_up_link"/>
+        <child link="delta_B_2_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_B_2_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_B_2_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_B_2_knee_cylinder_link"/>
+        <child link="delta_B_2_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_B_2_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_B_2_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_B_2_knee_cylinder_link"/>
+        <child link="delta_B_2_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_B_2_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 3 -->
+
+    <joint name="delta_B_3_knee_to_lower_joint" type="continuous">
+        <parent link="delta_B_3_up_link"/>
+        <child link="delta_B_3_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_B_3_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_B_3_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_B_3_knee_cylinder_link"/>
+        <child link="delta_B_3_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_B_3_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_B_3_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_B_3_knee_cylinder_link"/>
+        <child link="delta_B_3_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_B_3_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- =============================================================================== -->
+    <!-- =================================== delta C =================================== -->
+    <!-- =============================================================================== -->
+
+    <joint name="base_to_delta_C" type="fixed">
+        <parent link="body_base_link"/>
+        <child link="delta_C_base_link"/>
+        <origin xyz="-0.06 -0.103923048454 -0.02"/>
+    </joint>
+
+    <link name="delta_C_base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <material name="grey">
+                <color rgba="0.6 0.6 0.6 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.01" radius="0.04"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- base A to motors -->
+
+    <joint name="delta_C_base_to_motor_1" type="fixed">
+        <parent link="delta_C_base_link"/>
+        <child link="delta_C_1_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_C_1_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.03 0 -0.02325"/>
+            <material name="motorColor">
+                <color rgba="0.3 0.3 0.3 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.03 0 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_C_base_to_motor_2" type="fixed">
+        <parent link="delta_C_base_link"/>
+        <child link="delta_C_2_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_C_2_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 -1.0471975512" xyz="-0.015 0.0259807621135 -0.02325"/>
+            <material name="motorColor"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 -1.0471975512" xyz="-0.015 0.0259807621135 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <joint name="delta_C_base_to_motor_3" type="fixed">
+        <parent link="delta_C_base_link"/>
+        <child link="delta_C_3_motor_link"/>
+        <origin xyz="0 0 0"/>
+    </joint>
+
+    <link name="delta_C_3_motor_link">
+        <visual>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 1.0471975512" xyz="-0.015 -0.0259807621135 -0.02325"/>
+            <material name="motorColor"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.0285 0.034 0.0465"/>
+            </geometry>
+            <origin rpy="0 0 1.0471975512" xyz="-0.015 -0.0259807621135 -0.02325"/>
+        </collision>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- base A to cylinders (joint) -->
+
+    <joint name="motor_C_1" type="revolute">
+        <parent link="delta_C_base_link"/>
+        <child link="delta_C_jointCylinder_1_link"/>
+        <origin rpy="0 0 0" xyz=" 0.03 0 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_C_jointCylinder_1_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor">
+                <color rgba="1 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="motor_C_2" type="revolute">
+        <parent link="delta_C_base_link"/>
+        <child link="delta_C_jointCylinder_2_link"/>
+        <origin rpy="0 0 2.09439510239" xyz="-0.015 0.0259807621135 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_C_jointCylinder_2_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+    <joint name="motor_C_3" type="revolute">
+        <parent link="delta_C_base_link"/>
+        <child link="delta_C_jointCylinder_3_link"/>
+        <origin rpy="0 0 -2.09439510239" xyz="-0.015 -0.0259807621135 -0.03525"/>
+        <axis xyz="0 -1 0"/>
+        <limit effort="100" lower="-3.1" upper="+3.1" velocity="100"/>
+        <dynamics damping="0"/>
+    </joint>
+
+    <link name="delta_C_jointCylinder_3_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.01"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+    <!-- base A cylinders to upper leg -->
+
+    <joint name="delta_C_cylinder_to_upperLeg_1" type="fixed">
+        <parent link="delta_C_jointCylinder_1_link"/>
+        <child link="delta_C_1_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="delta_C_cylinder_to_upperLeg_2" type="fixed">
+        <parent link="delta_C_jointCylinder_2_link"/>
+        <child link="delta_C_2_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="delta_C_cylinder_to_upperLeg_3" type="fixed">
+        <parent link="delta_C_jointCylinder_3_link"/>
+        <child link="delta_C_3_up_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="delta_C_1_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <link name="delta_C_2_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <link name="delta_C_3_up_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+            <material name="upLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.04 0.07"/>
+            </geometry>
+            <origin xyz="0 0 -0.035" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 1 -->
+
+    <joint name="delta_C_1_knee_to_lower_joint" type="continuous">
+        <parent link="delta_C_1_up_link"/>
+        <child link="delta_C_1_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_C_1_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_C_1_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_C_1_knee_cylinder_link"/>
+        <child link="delta_C_1_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_C_1_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor">
+                <color rgba="0.7 0.7 1 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_C_1_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_C_1_knee_cylinder_link"/>
+        <child link="delta_C_1_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_C_1_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 2 -->
+
+    <joint name="delta_C_2_knee_to_lower_joint" type="continuous">
+        <parent link="delta_C_2_up_link"/>
+        <child link="delta_C_2_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_C_2_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_C_2_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_C_2_knee_cylinder_link"/>
+        <child link="delta_C_2_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_C_2_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_C_2_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_C_2_knee_cylinder_link"/>
+        <child link="delta_C_2_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_C_2_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <!-- parallel joints 3 -->
+
+    <joint name="delta_C_3_knee_to_lower_joint" type="continuous">
+        <parent link="delta_C_3_up_link"/>
+        <child link="delta_C_3_knee_cylinder_link"/>
+        <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="delta_C_3_knee_cylinder_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.038" radius="0.007"/>
+            </geometry>
+            <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+            <material name="cylinderColor"/>
+        </visual>
+        <inertial>
+            <mass value="0"/>
+            <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+        </inertial>
+    </link>
+
+
+    <joint name="delta_C_3_up_to_lowerLeg_1" type="continuous">
+        <parent link="delta_C_3_knee_cylinder_link"/>
+        <child link="delta_C_3_parallel_1_link"/>
+        <origin xyz="0 -0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_C_3_parallel_1_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+
+    <joint name="delta_C_3_up_to_lowerLeg_2" type="continuous">
+        <parent link="delta_C_3_knee_cylinder_link"/>
+        <child link="delta_C_3_parallel_2_link"/>
+        <origin xyz="0 0.02 0" rpy="0 0 0"/>
+        <axis xyz="1 0 0"/>
+    </joint>
+
+    <link name="delta_C_3_parallel_2_link">
+        <visual>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+            <material name="lowerLegColor"/>
+        </visual>
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <collision>
+            <geometry>
+                <box size="0.01 0.01 0.139"/>
+            </geometry>
+            <origin xyz="0 0 -0.07" rpy="0 0 0"/>
+        </collision>
+    </link>
+</robot>
